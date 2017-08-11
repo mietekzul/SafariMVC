@@ -28,13 +28,13 @@
     <spring:url value="/resource/save" var="formUrl">
 
     <form:form method="post" action="${formUrl}" modelAttribute="resource">
-    <%--<form action="<spring:url value="/resource/save"/>" method="POST">--%>
+        <%--<form action="<spring:url value="/resource/save"/>" method="POST">--%>
 
         <div class="row">
 
             <div class="form-group">
-                <label for="resource-name">Name</label> <input type="text"
-                                                               id="resource-name" class="form-control" name="name"/>
+                <label for="resource-name">Name</label>
+                <form:input path="name" cssClass="form-control" id="resource-name"></form:input>
             </div>
 
             <div class="form-group">
@@ -62,7 +62,7 @@
 
         </div>
 
-    <%--</form>--%>
+        <%--</form>--%>
     </form:form>
 
 </div>
