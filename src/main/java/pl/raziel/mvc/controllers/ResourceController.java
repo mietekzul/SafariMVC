@@ -1,9 +1,9 @@
-package com.infiniteskills.mvc.controllers;
+package pl.raziel.mvc.controllers;
 
-import com.infiniteskills.mvc.data.entities.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.raziel.mvc.data.entities.Resource;
 
 @Controller
 @RequestMapping("/resource")

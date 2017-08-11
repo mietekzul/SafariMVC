@@ -1,7 +1,5 @@
-package com.infiniteskills.mvc.controllers;
+package pl.raziel.mvc.controllers;
 
-import com.infiniteskills.mvc.data.entities.Project;
-import com.infiniteskills.mvc.data.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.raziel.mvc.data.entities.Project;
+import pl.raziel.mvc.data.services.ProjectService;
 
 import javax.servlet.http.HttpSession;
 

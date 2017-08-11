@@ -1,4 +1,4 @@
-package com.infiniteskills.mvc.data.entities;
+package pl.raziel.mvc.data.entities;
 
 import java.math.BigDecimal;
 

@@ -1,6 +1,6 @@
-package com.infiniteskills.mvc.data.services;
+package pl.raziel.mvc.data.services;
 
-import com.infiniteskills.mvc.data.entities.Project;
+import pl.raziel.mvc.data.entities.Project;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
