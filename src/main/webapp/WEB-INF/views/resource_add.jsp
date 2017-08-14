@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="<spring:url value="/resources/css/bootstrap-select.min.css"/>" type="text/css"/>
+    <link rel="stylesheet" href="<spring:url value="/resources/css/global.css"/>" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="<spring:url value="/resources/js/bootstrap-select.min.js"/>"></script>
@@ -25,27 +26,21 @@
         <h1>Resource</h1>
     </div>
 
-    <spring:url value="/resource/save" var="formUrl">
+    <spring:url value="/resource/save" var="formUrl"/>
 
-    <form:form method="post" action="${formUrl}" modelAttribute="resource">
-        <%--<form action="<spring:url value="/resource/save"/>" method="POST">--%>
+    <form:form action="${formUrl}" method="POST" modelAttribute="resource">
 
         <div class="row">
 
             <div class="form-group">
                 <label for="resource-name">Name</label>
-                <form:input path="name" cssClass="form-control" id="resource-name"></form:input>
+                <form:input path="name" cssClass="form-control" id="resource-name"/>
             </div>
 
             <div class="form-group">
                 <label for="resource-type">Type</label>
-                <select id="resource-type" name="type" class="selectpicker">
-                    <option></option>
-                    <option value="material">Material</option>
-                    <option value="other">Other</option>
-                    <option value="staff">Staff</option>
-                    <option value="tech">Technical Equipment</option>
-                </select>
+                <form:select path="type" items="${typeOptions}" cssClass="selectpicker"/>
+
             </div>
 
             <div class="form-group">
@@ -54,15 +49,24 @@
             </div>
 
             <div class="form-group">
-                <label for="unit">Unit of Measure</label> <input id="unit"
-                                                                 type="text" class="form-control" name="unitOfMeasure"/>
+                <label for="unitOfMeasure">Unit of Measure</label>
+                <form:radiobuttons path="unitOfMeasure" items="${radioOptions}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="indicators">Indicators</label>
+                <form:checkboxes id="indicators" path="indicators" items="${checkOptions}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <form:textarea id="notes" path="notes" cssClass="form-control" rows="3"/>
             </div>
 
             <button type="submit" class="btn btn-default">Submit</button>
 
         </div>
 
-        <%--</form>--%>
     </form:form>
 
 </div>
