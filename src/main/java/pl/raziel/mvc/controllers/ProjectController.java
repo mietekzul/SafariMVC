@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.raziel.mvc.data.entities.Project;
 import pl.raziel.mvc.data.services.ProjectService;
 
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/project")
@@ -33,9 +34,11 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String addProject(HttpSession session) {
-        session.setAttribute("token", "12345");
-        System.out.println("invoking addProject");
+    public String addProject(Model model) {
+        model.addAttribute("types", new ArrayList<>(Arrays.asList("", "Single Year", "Multi Year")));
+
+        model.addAttribute("project", new Project());
+
         return "project_add";
     }
 

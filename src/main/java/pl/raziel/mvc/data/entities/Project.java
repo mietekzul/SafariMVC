@@ -6,7 +6,7 @@ public class Project {
     private Long projectId;
     private String name;
     private String description;
-    private String sponsor;
+    private Sponsor sponsor;
     private BigDecimal authorizedHours;
     private BigDecimal authorizedFunds;
     private String year;
@@ -38,12 +38,12 @@ public class Project {
         this.description = description;
     }
 
-    public String getSponsor() {
-        return sponsor;
+    public void setSponsor(Sponsor sponsor) {
+        this.sponsor = sponsor;
     }
 
-    public void setSponsor(String sponsor) {
-        this.sponsor = sponsor;
+    public Sponsor getSponsor() {
+        return sponsor;
     }
 
     public BigDecimal getAuthorizedHours() {
@@ -92,7 +92,7 @@ public class Project {
         sb.append("projectId=").append(projectId);
         sb.append(", name='").append(name).append('\'');
         sb.append(", description='").append(description).append('\'');
-        sb.append(", sponsor='").append(sponsor).append('\'');
+        sb.append(", sponsor=").append(sponsor);
         sb.append(", authorizedHours=").append(authorizedHours);
         sb.append(", authorizedFunds=").append(authorizedFunds);
         sb.append(", year='").append(year).append('\'');

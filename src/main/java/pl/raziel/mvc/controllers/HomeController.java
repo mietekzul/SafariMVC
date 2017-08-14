@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.raziel.mvc.data.entities.Project;
+import pl.raziel.mvc.data.entities.Sponsor;
 
 @Controller
 public class HomeController {
@@ -13,7 +14,7 @@ public class HomeController {
         Project project = new Project();
 
         project.setName("First project");
-        project.setSponsor("NASA");
+        project.setSponsor(new Sponsor("NASE", "0700700700", "email@email.com"));
         project.setDescription("Simple project sponsored by NASA");
 
         model.addAttribute("currentProject", project);
