@@ -1,6 +1,7 @@
 package pl.raziel.mvc.data.entities;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Project {
     private Long projectId;
@@ -12,6 +13,7 @@ public class Project {
     private String year;
     private boolean special;
     private String type;
+    private List<String> pointsOfContact;
 
     public Long getProjectId() {
         return projectId;
@@ -86,6 +88,14 @@ public class Project {
         this.type = type;
     }
 
+    public List<String> getPointsOfContact() {
+        return pointsOfContact;
+    }
+
+    public void setPointsOfContact(List<String> pointsOfContact) {
+        this.pointsOfContact = pointsOfContact;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Project{");
@@ -98,6 +108,7 @@ public class Project {
         sb.append(", year='").append(year).append('\'');
         sb.append(", special=").append(special);
         sb.append(", type='").append(type).append('\'');
+        sb.append(", pointsOfContact=").append(pointsOfContact);
         sb.append('}');
         return sb.toString();
     }

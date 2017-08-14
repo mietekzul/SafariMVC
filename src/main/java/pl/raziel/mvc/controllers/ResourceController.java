@@ -29,9 +29,30 @@ public class ResourceController {
         return "resource_add";
     }
 
+    @ModelAttribute
+    public Resource getResource() {
+        System.out.println("Adding a new resource to the model.");
+        return new Resource();
+    }
+
+    @ModelAttribute("typeOptions")
+    public List<String> getOptions() {
+        return new LinkedList<>(Arrays.asList("Material", "Other stuff", "Technical equipment"));
+    }
+
+    @ModelAttribute("radioOptions")
+    public List<String> getRadios() {
+        return new LinkedList<>(Arrays.asList("Hours", "Piece", "Tons"));
+    }
+
+    @ModelAttribute("checkOptions")
+    public List<String> getChecks() {
+        return new LinkedList<>(Arrays.asList("Lead Time", "Special Rate", "Requires Approval"));
+    }
+
     @RequestMapping("/save")
     public String save(@ModelAttribute Resource resource) {
         System.out.println("Invoking the save() method with: " + resource);
-        return "resource_add";
+        return "redirect:/resource/add";
     }
 }
