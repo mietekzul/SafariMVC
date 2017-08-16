@@ -3,13 +3,14 @@ package pl.raziel.mvc.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import pl.raziel.mvc.data.entities.Project;
 import pl.raziel.mvc.data.services.ProjectService;
+import pl.raziel.mvc.data.validators.ProjectValidator;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,10 +44,20 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String saveProject(@ModelAttribute Project project) {
-        System.out.println("invoking saveProject");
+    public String saveProject(@Valid @ModelAttribute Project project, Errors errors) {
+        if (!errors.hasErrors()) {
+            System.out.println("The Project validated");
+        } else {
+            System.out.println("The project did not validate");
+        }
+
         System.out.println(project);
         return "project_add";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(new ProjectValidator());
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, params = {"type=multi"})
