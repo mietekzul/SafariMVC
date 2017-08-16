@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import pl.raziel.mvc.data.entities.Resource;
 
 import java.util.Arrays;
@@ -29,12 +30,12 @@ public class ResourceController {
     }
 
     @RequestMapping("/save")
-    public String save(@ModelAttribute Resource resource) {
+    public String save(@ModelAttribute Resource resource, SessionStatus status) {
         System.out.println("Invoking save()");
         System.out.println(resource);
+        status.setComplete();
         return "redirect:/resource/add";
     }
-
 
     @ModelAttribute("resource")
     public Resource getResource() {
