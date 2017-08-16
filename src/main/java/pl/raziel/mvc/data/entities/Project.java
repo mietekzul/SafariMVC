@@ -2,9 +2,11 @@ package pl.raziel.mvc.data.entities;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.List;
 
+@XmlRootElement(name = "project")
 public class Project {
     private Long projectId;
     private String name;

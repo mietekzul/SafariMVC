@@ -21,6 +21,11 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    @RequestMapping(value = "find/{projectId}")
+    public @ResponseBody Project findProjectObject(Model model, @PathVariable("projectId") Long projectId){
+        return projectService.find(projectId);
+    }
+
     @RequestMapping(value = "/{projectId}")
     public String findProject(Model model, @PathVariable("projectId") Long projectId) {
         model.addAttribute("project", this.projectService.find(projectId));
