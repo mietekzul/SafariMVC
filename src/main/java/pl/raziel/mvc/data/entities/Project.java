@@ -1,11 +1,14 @@
 package pl.raziel.mvc.data.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 public class Project {
     private Long projectId;
     private String name;
+    @NotBlank(message = "You must provide description.")
     private String description;
     private Sponsor sponsor;
     private BigDecimal authorizedHours;

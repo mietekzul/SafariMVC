@@ -49,6 +49,7 @@ public class ProjectController {
             System.out.println("The Project validated");
         } else {
             System.out.println("The project did not validate");
+            return "project_add";
         }
 
         System.out.println(project);
