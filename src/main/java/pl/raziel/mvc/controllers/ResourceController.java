@@ -2,9 +2,7 @@ package pl.raziel.mvc.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import pl.raziel.mvc.data.entities.Resource;
 
@@ -21,6 +19,14 @@ public class ResourceController {
     public String add(Model model) {
         System.out.println("Invoking add()");
         return "resource_add";
+    }
+
+    @RequestMapping("/request")
+    @ResponseBody
+    public String request(@RequestBody String resource) {
+        System.out.println(resource);
+        // send out an email for request
+        return "The request has been sent for approval";
     }
 
     @RequestMapping("/review")
@@ -45,21 +51,16 @@ public class ResourceController {
 
     @ModelAttribute("typeOptions")
     public List<String> getTypes() {
-        return new LinkedList<>(Arrays.asList(new String[]{
-                "Material", "Other", "Staff", "Technical Equipment"}));
+        return new LinkedList<>(Arrays.asList("Material", "Other", "Staff", "Technical Equipment"));
     }
 
     @ModelAttribute("radioOptions")
     public List<String> getRadios() {
-        return new LinkedList<>(Arrays.asList(new String[]{
-                "Hours", "Piece", "Tons"
-        }));
+        return new LinkedList<>(Arrays.asList("Hours", "Piece", "Tons"));
     }
 
     @ModelAttribute("checkOptions")
     public List<String> getChecks() {
-        return new LinkedList<>(Arrays.asList(new String[]{
-                "Lead Time", "Special Rate", "Requires Approval"
-        }));
+        return new LinkedList<>(Arrays.asList("Lead Time", "Special Rate", "Requires Approval"));
     }
 }
