@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import pl.raziel.mvc.data.entities.Resource;
 
 import java.util.Arrays;
@@ -12,12 +13,19 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/resource")
+@SessionAttributes("resource")
 public class ResourceController {
 
     @RequestMapping("/add")
     public String add(Model model) {
         System.out.println("Invoking add()");
         return "resource_add";
+    }
+
+    @RequestMapping("/review")
+    public String review(@ModelAttribute Resource resource) {
+        System.out.println("Invoking review()");
+        return "resource_review";
     }
 
     @RequestMapping("/save")
@@ -27,24 +35,30 @@ public class ResourceController {
         return "redirect:/resource/add";
     }
 
-    @ModelAttribute
+
+    @ModelAttribute("resource")
     public Resource getResource() {
-        System.out.println("Adding a new resource to the model.");
+        System.out.println("Adding a new resource to the model");
         return new Resource();
     }
 
     @ModelAttribute("typeOptions")
-    public List<String> getOptions() {
-        return new LinkedList<>(Arrays.asList("Material", "Other stuff", "Technical equipment"));
+    public List<String> getTypes() {
+        return new LinkedList<>(Arrays.asList(new String[]{
+                "Material", "Other", "Staff", "Technical Equipment"}));
     }
 
     @ModelAttribute("radioOptions")
     public List<String> getRadios() {
-        return new LinkedList<>(Arrays.asList("Hours", "Piece", "Tons"));
+        return new LinkedList<>(Arrays.asList(new String[]{
+                "Hours", "Piece", "Tons"
+        }));
     }
 
     @ModelAttribute("checkOptions")
     public List<String> getChecks() {
-        return new LinkedList<>(Arrays.asList("Lead Time", "Special Rate", "Requires Approval"));
+        return new LinkedList<>(Arrays.asList(new String[]{
+                "Lead Time", "Special Rate", "Requires Approval"
+        }));
     }
 }
