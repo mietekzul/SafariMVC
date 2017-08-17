@@ -67,7 +67,7 @@ public class ProjectController {
     public String saveProject(@Valid @ModelAttribute Project project, Errors errors, RedirectAttributes attributes) {
         project.setProjectId(55L);
         projectService.save(project);
-        attributes.addAttribute("projectId", project.getProjectId());
+        attributes.addFlashAttribute("project", project);
         return "redirect:/";
     }
 
