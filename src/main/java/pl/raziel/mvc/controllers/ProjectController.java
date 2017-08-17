@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.raziel.mvc.data.entities.Project;
 import pl.raziel.mvc.data.services.ProjectService;
 import pl.raziel.mvc.data.validators.ProjectValidator;
@@ -22,7 +23,8 @@ public class ProjectController {
     private ProjectService projectService;
 
     @RequestMapping(value = "find/{projectId}")
-    public @ResponseBody Project findProjectObject(Model model, @PathVariable("projectId") Long projectId){
+    public @ResponseBody
+    Project findProjectObject(Model model, @PathVariable("projectId") Long projectId) {
         return projectService.find(projectId);
     }
 
@@ -48,17 +50,25 @@ public class ProjectController {
         return "project_add";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String saveProject(@Valid @ModelAttribute Project project, Errors errors) {
-        if (!errors.hasErrors()) {
-            System.out.println("The Project validated");
-        } else {
-            System.out.println("The project did not validate");
-            return "project_add";
-        }
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public String saveProject(@Valid @ModelAttribute Project project, Errors errors) {
+//        if (!errors.hasErrors()) {
+//            System.out.println("The Project validated");
+//        } else {
+//            System.out.println("The project did not validate");
+//            return "project_add";
+//        }
+//
+//        System.out.println(project);
+//        return "project_add";
+//    }
 
-        System.out.println(project);
-        return "project_add";
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String saveProject(@Valid @ModelAttribute Project project, Errors errors, RedirectAttributes attributes) {
+        project.setProjectId(55L);
+        projectService.save(project);
+        attributes.addAttribute("projectId", project.getProjectId());
+        return "redirect:/";
     }
 
     @InitBinder

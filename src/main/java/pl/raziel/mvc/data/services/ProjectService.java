@@ -13,11 +13,18 @@ public class ProjectService {
     private List<Project> projects = new LinkedList<>();
 
     public ProjectService() {
-        Project javaProject = this.createProject("Java Project", "This is a Java Project", new Sponsor("Oracle", "555-555-5555", "oracle@oracle"));
-        Project javascriptProject = this.createProject("Javascript Project", "This is a Javascript Project", new Sponsor("Mozilla", "555-555-5555", "mozilla@mozilla.com"));
-        Project htmlProject = this.createProject("HTML Project", "This is an HTML project", new Sponsor("Google", "555-555-5555", "google@goole.com"));
+        Project javaProject = this.createProject(1L, "Java Project",
+                "This is a Java Project", new Sponsor("Oracle", "555-555-5555",
+                        "oracle@oracle.com"));
+        Project javascriptProject = this.createProject(2L,
+                "Javascript Project", "This is a Javascript Project",
+                new Sponsor("Mozilla", "555-555-5555", "mozilla@mozilla.com"));
+        Project htmlProject = this.createProject(3L, "HTML Project",
+                "This is an HTML project", new Sponsor("Google",
+                        "555-555-5555", "google@google.com"));
 
-        this.projects.addAll(Arrays.asList(javaProject, javascriptProject, htmlProject));
+        this.projects.addAll(Arrays.asList(new Project[]{javaProject,
+                javascriptProject, htmlProject}));
     }
 
     public List<Project> findAll() {
@@ -25,15 +32,22 @@ public class ProjectService {
     }
 
     public Project find(Long projectId) {
-        return this.projects.stream().filter(p -> p.getProjectId().equals(projectId)).collect(Collectors.toList()).get(0);
+        return this.projects.stream().filter(p -> {
+            return p.getProjectId().equals(projectId);
+        }).collect(Collectors.toList()).get(0);
     }
 
-    private Project createProject(String title, String description, Sponsor sponsor) {
+    public void save(Project project) {
+        this.projects.add(project);
+    }
+
+    private Project createProject(Long projectId, String title,
+                                  String description, Sponsor sponsor) {
         Project project = new Project();
         project.setName(title);
         project.setAuthorizedFunds(new BigDecimal("100000"));
         project.setAuthorizedHours(new BigDecimal("1000"));
-        project.setProjectId(1L);
+        project.setProjectId(projectId);
         project.setSpecial(false);
         project.setType("multi");
         project.setYear("2015");
@@ -41,5 +55,4 @@ public class ProjectService {
         project.setSponsor(sponsor);
         return project;
     }
-
 }
